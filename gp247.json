@@ -9,6 +9,6 @@
     "configKey": "ShopDiscount",
     "version": "1.0",
     "requireCore": ["1.1"],
-    "requirePackages": [],
+    "requirePackages": ["gp247/shop"],
     "requireExtensions": []
 }
