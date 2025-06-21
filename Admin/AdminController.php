@@ -38,7 +38,7 @@ class AdminController extends RootAdminController
             'status' => gp247_language_render($this->plugin->appPath.'::lang.status'),
         ];
 
-        if (gp247_store_check_multi_domain_installed()) {
+        if (gp247_store_check_multi_partner_installed() ||  gp247_store_check_multi_store_installed()) {
             if (session('adminStoreId') == GP247_STORE_ID_ROOT) {
                 // Only show store info if store is root
                 $listTh['shop_store'] = gp247_language_render('front.store_list');
@@ -65,7 +65,7 @@ class AdminController extends RootAdminController
 
         $dataTmp = (new ShopDiscount)->getDiscountListAdmin($dataSearch);
         $arrDiscountId = $dataTmp->pluck('id')->toArray();
-        if (gp247_store_check_multi_domain_installed()) {
+        if (gp247_store_check_multi_partner_installed() ||  gp247_store_check_multi_store_installed()) {
             if (session('adminStoreId') == GP247_STORE_ID_ROOT) {
                 // Only show store info if store is root
                 $tableStore = (new AdminStore)->getTable();
@@ -94,7 +94,7 @@ class AdminController extends RootAdminController
                 'status' => $row['status'] ? '<span class="label label-success">ON</span>' : '<span class="label label-danger">OFF</span>',
             ];
 
-            if (gp247_store_check_multi_domain_installed()) {
+            if (gp247_store_check_multi_partner_installed() ||  gp247_store_check_multi_store_installed()) {
                 $dataMap['shop_store'] = '';
                 if (session('adminStoreId') == GP247_STORE_ID_ROOT) {
                     // Only show store info if store is root

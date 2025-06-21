@@ -63,7 +63,7 @@ class ShopDiscount extends Model
     public function getPromotionByCode($code) {
         $promotion = $this->where($this->getTable().'.code', $code);
 
-        if (gp247_store_check_multi_domain_installed()) {
+        if (gp247_store_check_multi_partner_installed() ||  gp247_store_check_multi_store_installed()) {
             $storeId = config('app.storeId');
             $tableStore = (new AdminStore)->getTable();
             $tableDiscountStore = (new ShopDiscountStore)->getTable();
@@ -157,7 +157,7 @@ class ShopDiscount extends Model
     public static function getDiscountAdmin($id) {
         $data =  self::where('id', $id);
         $tableDiscount = (new ShopDiscount)->getTable();
-        if (gp247_store_check_multi_domain_installed()) {
+        if (gp247_store_check_multi_partner_installed() ||  gp247_store_check_multi_store_installed()) {
             if (session('adminStoreId') != GP247_STORE_ID_ROOT) {
                 $tableDiscountStore = (new ShopDiscountStore)->getTable();
                 $data = $data->leftJoin($tableDiscountStore, $tableDiscountStore . '.discount_id', $tableDiscount . '.id');
@@ -181,7 +181,7 @@ class ShopDiscount extends Model
         $keyword          = $dataSearch['keyword'] ?? '';
         $discountList = (new ShopDiscount);
         $tableDiscount = (new ShopDiscount)->getTable();
-        if (gp247_store_check_multi_domain_installed()) {
+        if (gp247_store_check_multi_partner_installed() ||  gp247_store_check_multi_store_installed()) {
             if (session('adminStoreId') != GP247_STORE_ID_ROOT) {
                 $tableDiscountStore = (new ShopDiscountStore)->getTable();
                 $discountList = $discountList->leftJoin($tableDiscountStore, $tableDiscountStore . '.discount_id', $tableDiscount . '.id');
@@ -233,7 +233,7 @@ class ShopDiscount extends Model
         $tableDiscount = (new ShopDiscount)->getTable();
         $check = (new ShopDiscount)->where($type, $fieldValue);
 
-        if (gp247_store_check_multi_domain_installed()) {
+        if (gp247_store_check_multi_partner_installed() ||  gp247_store_check_multi_store_installed()) {
             if (session('adminStoreId') != GP247_STORE_ID_ROOT) {
                 $tableDiscountStore = (new ShopDiscountStore)->getTable();
                 $check = $check->leftJoin($tableDiscountStore, $tableDiscountStore . '.discount_id', $tableDiscount . '.id');

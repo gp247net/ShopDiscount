@@ -209,7 +209,7 @@ class AppConfig extends ExtensionConfigDefault
             } else {
                 $value = gp247_currency_value($check['content']['reward']);
             }
-            if (gp247_store_check_multi_domain_installed()) {
+            if (gp247_store_check_multi_partner_installed() ||  gp247_store_check_multi_store_installed()) {
                 //Add info for earch store
                 $storeID = $check['content']['store_id'];
                 $dataStore[$storeID]['value'] = $value;
